@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question For You</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 420px;
+        }
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+        .stats-box {
+            display: none;
+            background: #fff0f3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 14px;
+            color: #4a4a4a;
+            border-left: 5px solid #ff4d6d;
+        }
+        .stats-box p {
+            margin: 5px 0;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 60px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #yesBtn {
+            background-color: #4cc9f0;
+            color: white;
+        }
+        #noBtn {
+            background-color: #ff4d6d;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="question">Will you go on a date with me? 🌹</h1>
+        
+        <div id="stats" class="stats-box">
+            <p><strong>⏱️ Time taken:</strong> <span id="timeStat">0</span> seconds</p>
+            <p><strong>🎯 First button hovered:</strong> <span id="firstStat">-</span></p>
+            <p><strong>🏃‍♂️ 'No' button escapes:</strong> <span id="dodgeStat">0</span></p>
+        </div>
+
+        <div class="btn-container">
+            <button id="yesBtn" onclick="selectOption('Yes')">Yes!</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="selectOption('No')">No</button>
+        </div>
+    </div>
+
+    <script>
+        let startTime = Date.now();
+        let firstHoveredButton = null;
+        let hoverCount = 0;
+
+        document.getElementById('noBtn').addEventListener('mouseenter', () => {
+            if (!firstHoveredButton) firstHoveredButton = 'No';
+            hoverCount++;
+        });
+
+        document.getElementById('yesBtn').addEventListener('mouseenter', () => {
+            if (!firstHoveredButton) firstHoveredButton = 'Yes';
+        });
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const padding = 60;
+            
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function selectOption(choice) {
+            let endTime = Date.now();
+            let timeTakenSeconds = ((endTime - startTime) / 1000).toFixed(2);
+
+            // Change header text
+            document.getElementById('question').innerHTML = "Yay! See you soon! ❤️";
+            
+            // Hide the buttons entirely
+            document.querySelector('.btn-container').style.display = 'none';
+            
+            // Populate and show the dashboard summary card
+            document.getElementById('timeStat').innerText = timeTakenSeconds;
+            document.getElementById('firstStat').innerText = firstHoveredButton || choice;
+            document.getElementById('dodgeStat').innerText = hoverCount;
+            document.getElementById('stats').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
