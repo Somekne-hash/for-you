@@ -7,7 +7,7 @@
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
+            margin: 10;
             padding: 0;
         }
         body {
@@ -122,7 +122,7 @@
     <div class="card" id="mainCard">
         <!-- Screen 1: The Invitation Question -->
         <div id="questionView">
-            <h1>Will you hang out with me?</h1>
+            <h1>Wanna hang out sometime soon?</h1>
             <div class="btn-container">
                 <button id="yesBtn" class="btn-primary" onclick="goToScheduler()">Yes</button>
                 <button id="noBtn" class="btn-secondary" onmouseover="jumpButton()" onclick="jumpButton()">No</button>
@@ -132,9 +132,9 @@
         <!-- Screen 2: The Date/Time Selection Scheduler -->
         <div id="schedulerView" class="view-section">
             <h1>Select Date & Time</h1>
-            <h2>1. Choose Date (Available next 6 months)</h2>
+            <h2>1. Choose Date</h2>
             <input type="date" id="datePicker" onchange="validateDate()">
-            <h2>2. Choose Preferred Time</h2>
+            <h2>2. Choose Time</h2>
             <input type="time" id="timePicker">
             <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="goToNotes()">Next</button>
         </div>
@@ -142,7 +142,7 @@
         <!-- Screen 3: User Personal Notes Entry Box -->
         <div id="notesView" class="view-section">
             <h1>Add a Note</h1>
-            <h2>Leave a message, suggestion, or location idea (Optional):</h2>
+            <h2>leave a message or a note if u want :):</h2>
             <textarea id="userNotes" rows="4" placeholder="Type your message here..."></textarea>
             <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="submitAllData()">Finish</button>
         </div>
